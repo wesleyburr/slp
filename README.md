@@ -1,7 +1,7 @@
 slp
 ===
 
-slp: Discrete Prolate Spheroidal Sequence (Slepian) Regression Smoothers
+slp: Discrete Prolate Spheroidal (Slepian) Sequence  Regression Smoothers
 
 Description
 ===========
