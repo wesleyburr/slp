@@ -1,7 +1,6 @@
 \name{slp-package}
 \alias{slp-package}
 \alias{Slepians}
-\alias{slp}
 \docType{package}
 \title{
     slp: Discrete Prolate Spheroidal Sequence (Slepian) Regression Smoothers 
