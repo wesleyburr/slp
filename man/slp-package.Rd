@@ -3,7 +3,7 @@
 \alias{Slepians}
 \docType{package}
 \title{
-    slp: Discrete Prolate Spheroidal Sequence (Slepian) Regression Smoothers 
+    slp: Discrete Prolate Spheroidal (Slepian) Sequence Regression Smoothers 
 }
 \description{
   Interface for creation of 'slp' class smoother objects for use in 
