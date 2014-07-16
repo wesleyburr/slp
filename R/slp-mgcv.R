@@ -182,7 +182,8 @@ smooth.construct.slp.smooth.spec <- function(object, data, knots) {
     Wn <- round(W * 365.2425)
     if(checkSaved(N, Wn, K) & !forceC) {  # this case is here to load the basis set from hard disk (saved)
 
-        data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)))
+        data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)),
+             envir = environment())
  
         if(!intercept) { basis <- basis[, -1] }
   

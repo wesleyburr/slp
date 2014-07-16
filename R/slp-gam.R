@@ -61,7 +61,8 @@ slp <- function(x, W = NA, K = NA, deltat = 1, naive = FALSE,
   Wn <- round(W * 365.2425)    # convert to df/year
   if(checkSaved(N, Wn, K) & !forceC) {
 
-    data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)))
+    data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)), 
+         envir = environment())
 
     if(!intercept) { basis <- basis[, -1] }
     

@@ -16,7 +16,7 @@
 checkSaved <- function(N, W, K) {
 
   # load list of saved objects
-  data(slpSavedObjects)
+  data(slpSavedObjects, envir = environment())
 
   check <- unlist(lapply(slpSavedObjects, FUN = function(x) { 
                     (x[1] == N & x[2] == W & x[3] == K)  }))

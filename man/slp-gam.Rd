@@ -1,5 +1,6 @@
 \name{slp.gam}
 \alias{slp.gam}
+\alias{slp}
 \title{Generate a Basis Matrix for Discrete Prolate Spheroidal (Slepian) Sequences}
 \description{
   Generate the basis matrix for a particular \code{N, W} Slepian sequence
@@ -7,6 +8,9 @@
   without distortion. Can be quite slow execution due to the latter property.
 
   Based on \code{\link[splines]{ns}} for implementation with \code{\link[gam]{gam}}.
+
+  Parallel implementation for \code{\link[mgcv]{mgcv}} included in package as
+  \code{\link{slp.mgcv}}.
 }
 \usage{
 slp(x, W = NA, K = NA, deltat = 1, naive = FALSE, intercept = FALSE, 

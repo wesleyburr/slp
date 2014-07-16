@@ -8,6 +8,8 @@ Description: Interface for creation of 'slp' class smoother objects for
              'gam' and 'mgcv'). 
 Depends: R (>= 2.14.0)
 License: GPL (>= 2)
-Imports: mgcv (>= 1.7.18), gam (>= 1.09)
-Packaged: 2014-07-16 15:30:00 UTC; wburr
+Imports: mgcv (>= 1.7.18)
+Suggests: gam (>= 1.09)
+Packaged: 2014-07-16 16:30:00 UTC; wburr
 NeedsCompilation: yes
+Repositry: cran

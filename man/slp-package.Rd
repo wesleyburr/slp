@@ -1,6 +1,5 @@
 \name{slp-package}
 \alias{slp-package}
-\alias{slp}
 \alias{Slepians}
 \docType{package}
 \title{
@@ -55,7 +54,7 @@ Maintainer: Wesley Burr <wesley.burr@gmail.com>
 \keyword{Slepian}
 \seealso{
 \code{\link[multitaper:spec.mtm]{multitaper}}
-\code{\link[mgcv:mgcv-package]{mgcv}}
-\code{\link[gam:gam]{gam}}
+\code{\link[mgcv]{mgcv}}
+\code{\link[gam]{gam}}
 }
 
