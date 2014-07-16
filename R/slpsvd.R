@@ -1,4 +1,4 @@
-.slpsvd <- function(N, A) {
+.slpsvd <- function(A, N, K) {
 
     ## If N is passed in as floating point, the cast to 
     ## as.integer() in the Fortran call does not quite work properly, so
@@ -8,13 +8,14 @@
     } 
     stopifnot(dim(A)[1] == dim(A)[2], dim(A)[1] == N)
 
-    cat("Calling Fortran \n")
-    .Fortran("slpsvd", N = as.integer(N), A = as.double(A), 
-                    VT = double(N * N), WORK = double(3 * N * N + 7 * N), 
-                    LWORK = as.integer(3 * N * N + 7 * N), IWORK = integer(8 * N),
+    out <- .Fortran("SLPSVD", M = as.integer(N), N = as.integer(N), 
+                    A = as.double(A), LDA = as.integer(N), S = double(N), 
+                    VT = double(N * N), LDVT = as.integer(N), 
+                    WORK = double(3 * N * N + 7 * N), LWORK = as.integer(3 * N * N + 7 * N), 
+                    IWORK = integer(8 * N), NLSV = as.integer(K), 
                     PACKAGE='slp')
-    cat("after .Fortran call ... \n")
-    #print(str(out))
-    #return(out)
+
+    out <- list(d = out$S, u = matrix(out$A, nrow = N, ncol = N)[, 1:K])
+    return(out)
 }
 

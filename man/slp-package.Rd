@@ -1,5 +1,6 @@
 \name{slp-package}
 \alias{slp-package}
+\alias{slp}
 \alias{Slepians}
 \docType{package}
 \title{
@@ -7,22 +8,19 @@
 }
 \description{
   Interface for creation of 'slp' class smoother objects for use in 
-  Generalized Additive Models (e.g., packages 'gam' and 'mgcv'). 
+  Generalized Additive Models as implemented by packages gam and mgcv.
 }
 \details{
 \tabular{ll}{
 Package: \tab slp\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
-Date: \tab 2014-03-17\cr
+Date: \tab 2014-07-16\cr
 License: \tab MIT \cr
 }
 }
 \author{
 Wesley Burr
-
-with contributions from Karim Rahim and David J. Thomson (in particular the
-compiled Fortran code for dpss generation).
 
 Maintainer: Wesley Burr <wesley.burr@gmail.com>
 }
@@ -50,11 +48,11 @@ Maintainer: Wesley Burr <wesley.burr@gmail.com>
   Wood, S.N. (2006) \emph{Generalized Additive Models: an introduction with R},
   CRC
 }
-\keyword{algebra}
 \keyword{models}
 \keyword{regression}
 \keyword{ts}
 \keyword{smooth}
+\keyword{Slepian}
 \seealso{
 \code{\link[multitaper:spec.mtm]{multitaper}}
 \code{\link[mgcv:mgcv-package]{mgcv}}
