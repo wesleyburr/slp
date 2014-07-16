@@ -21,6 +21,26 @@
        \code{object[['term']]}. Typically just a single time index array.}
   \item{knots}{a list containing any knots supplied for basis setup -- should be \code{NULL}, as
        slp basis objects are not generated from knots.}
+  \bold{The xt parameter}
+  The \code{xt} (extension) parameter is the primary way of passing additional information
+  from the \code{s(...)} parent to the specific S3 methods which compute the basis vectors.
+  For the \code{slp} package, there are a number of possible parameters which can be passed
+  through this approach, paralleling those for a \code{\link[slp.gam]{slp}} call.
+  \item{N}{a parameter for specifying the length of time, in units of \code{deltat}. If not
+  provided, will be computed from \code{length(data[[object$term]])}.}
+  \item{W}{the time-bandwidth parameter, as per \code{\link[slp.gam]{slp}}; in 
+           units of per-\code{deltat}. }
+  \item{K}{the number of basis vectors, as per \code{\link[slp.gam]{slp}}.}
+  \item{deltat}{the time step, assumed to be \code{1} or \code{6} in days.}
+  \item{mask}{an array of logicals, indicating good/bad data. Should be the same 
+              length as the time index \bold{before} \code{mgcv} removes \code{NA}s
+              from consideration. See examples below. }
+  \item{naive}{logical: choose SLP vs SLP2 or SLP3, as per \code{\link[slp.gam]{slp}}. }
+  \item{intercept}{logical: include intercept with smooth, as per \code{\link[slp.gam]{slp}}. }
+  \item{customSVD}{logical: use custom SVD call, as per \code{\link[slp.gam]{slp}}. }
+  \item{forceC}{logical: force computation of basis vectors or load from disk (if available), 
+                as per \code{\link[slp.gam]{slp}}. }
+
 }
 \value{
     An object of class \code{slp.smooth}. In addition to the usual elements of a smooth
@@ -61,6 +81,7 @@
   For large \code{N} this routine can be \bold{very} slow. If you are computing models with
   large \code{N}, we highly recommend pre-computing the basis object, then using it
   in your models without recomputation. The third example below demonstrates this approach.
+
 }
 \seealso{
   \code{\link[package:mgcv]{smooth.construct}},
@@ -87,20 +108,43 @@
     library("slp")
 
     N <- 730
-    W <- 8 / N
-    K <- 16         # will actually use 15 df as intercept = FALSE
+    W <- 14 / N
+    K <- 28         # will actually use 27 df as intercept = FALSE
     x <- rnorm(n = N, sd = 1)
     y <- x + rnorm(n = N, sd = 2) + 5.0
     t <- seq(1, N)    
 
-    # note: all three examples share identical results
+    # note: these two examples share identical results
 
     # example with in-call computation, using K (df)
-    fit1 <- gam(y ~ x + s(t, bs = 'slp', xt = list(K = K)), family = gaussian) 
+    fit1 <- gam(y ~ x + s(t, bs = 'slp', xt = list(K = K)), family = gaussian)
 
     # example with in-call computation, using W
     fit2 <- gam(y ~ x + s(t, bs = 'slp', xt = list(W = W)), family = gaussian)
 
+    summary(fit2)
+
+    # full xt list
+    ext <- list(N = N, W = W, K = K, deltat = 1, naive = FALSE, 
+                intercept = FALSE, customSVD = TRUE, forceC = TRUE,
+                mask = rep(TRUE, N))
+    # results of fit3 are identical to fit2
+    fit3 <- gam(y ~ x + s(t, bs = 'slp', xt = ext), family = gaussian)
+
+    # example with missing data
+    x2 <- x
+    x2[sample(t[-c(1, N)], 50)] <- NA
+
+    # form good/bad logical array `mask'
+    mask <- x2
+    mask[!is.na(x2)] <- 1;  mask[is.na(x2)] <- 0
+
+    # `mask' gets passed in as part of xt = ext
+    ext <- list(N = N, W = W, K = K, deltat = 1, naive = FALSE, 
+                intercept = FALSE, customSVD = TRUE, forceC = FALSE,
+                mask = rep(TRUE, N))
+    # fit proceeds; will be different to fit1-fit3
+    fit4 <- gam(y ~ x + s(t, bs = 'slp', xt = ext), family = gaussian)
 }
 \keyword{models}
 \keyword{smooth}

@@ -10,7 +10,7 @@
 }
 \usage{
 slp(x, W = NA, K = NA, deltat = 1, naive = FALSE, intercept = FALSE, 
-    customSVD = TRUE)
+    customSVD = TRUE, forceC = FALSE)
 }
 \arguments{
   \item{x}{the predictor variable.  Missing values are allowed. Assumed to be contiguous;
@@ -39,6 +39,10 @@ slp(x, W = NA, K = NA, deltat = 1, naive = FALSE, intercept = FALSE,
       modified version of \code{DGESDD} LAPACK 3.5.0. The modified version provides significant
       speed improvements as it skips a number of unnecessary steps for the particular edge
       case needed by \code{slp}.}
+  \item{forceC}{a flag for forced computation of the basis vectors. Several combinations of commonly
+      used \code{N, W, K} parameters have been pre-computed and included with the package. If this 
+      parameter is set to \code{TRUE}, the routine will compute the basis vectors regardless of whether
+      they are available in pre-computed form. See \code{\link{checkSaved}{checkSaved}} for further details. }
 }
 \details{
   \code{slp} is based around the routine \code{.dpss}, which generates a family of Discrete
@@ -88,8 +92,8 @@ slp(x, W = NA, K = NA, deltat = 1, naive = FALSE, intercept = FALSE,
     library("gam")
     library("slp")
     N <- 730
-    W <- 8 / N
-    K <- 16         # will actually use 15 df when intercept = FALSE
+    W <- 14 / N
+    K <- 28         # will actually use 27 df when intercept = FALSE
     x <- rnorm(n = N, sd = 1)
     y <- x + rnorm(n = N, sd = 2) + 5.0
     t <- seq(1, N)    
@@ -97,15 +101,19 @@ slp(x, W = NA, K = NA, deltat = 1, naive = FALSE, intercept = FALSE,
     # note: all three examples share identical results
 
     # example with in-call computation, using K (df)
-    fit1 <- gam(y ~ x + slp(t, K = K), family = gaussian) 
+    fit1 <- gam(y ~ x + slp(t, K = K, forceC = TRUE), family = gaussian) 
 
     # example with in-call computation, using W
-    fit2 <- gam(y ~ x + slp(t, W = W), family = gaussian)
+    fit2 <- gam(y ~ x + slp(t, W = W, forceC = TRUE), family = gaussian)
 
     # example with out-of-call computation, using K
-    timeBasis <- slp(t, K = K)
+    timeBasis <- slp(t, K = K, forceC = TRUE)
     fit3 <- gam(y ~ x + timeBasis, family = gaussian)
 
+    # the same computations can be done using pre-computed basis vectors
+    # for significant speed-ups, especially for large N - see `checkSaved'
+    # for more details
+    fit4 <- gam(y ~ x + slp(t, W = W, forceC = FALSE))
 }
 \keyword{models}
 \keyword{smooth}

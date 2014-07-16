@@ -2,7 +2,9 @@
 #
 #   Extensions to mgcv package allowing a projection Slepian basis
 #   to be used; part of the slp package
-#   - wburr, July 2014
+# 
+#   (C) wburr, July 2014
+#   Licensed under GPL-2
 #
 ########################################################################
 
@@ -147,10 +149,18 @@ smooth.construct.slp.smooth.spec <- function(object, data, knots) {
     } else {
         customSVD <- TRUE
     }
-  
+
+    # force computation of basis vectors, or read from disk (if available)?
+    if(!is.null(ext[['forceC']])) {
+        forceC <- ext[['forceC']]
+    } else {
+        forceC <- FALSE
+    }
+
     ################################################################################   
     # 
-    #  All parameters set: 3 numeric (N, W, K), 3 logical (naive, intercept, customSVD)
+    #  All parameters set: 3 numeric (N, W, K), 3 logical (naive, intercept, customSVD),
+    #  possibly mask, possibly forceC
     #  
     #  From here the code is very similar to slp-gam.R, with the only change being
     #  in the careful examination of a 'mask' variable _if_ wx != data[['term']]
@@ -168,11 +178,12 @@ smooth.construct.slp.smooth.spec <- function(object, data, knots) {
     #    * this is not desirable in this case, so we set C = zero-row matrix
     #
     object[['C']] <- matrix(data=NA, nrow = 0, ncol = K)
-  
-    if(FALSE) {  # this case is here to load the basis set from hard disk (saved)
-        Wn <- round(W * 365.2425)
-        data(paste0("basis_N_", N[j], "_W_", W[k], "_K_", K, ".RData"))
-  
+
+    Wn <- round(W * 365.2425)
+    if(checkSaved(N, Wn, K) & !forceC) {  # this case is here to load the basis set from hard disk (saved)
+
+        data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)))
+ 
         if(!intercept) { basis <- basis[, -1] }
   
         basisFull <- basis
@@ -226,20 +237,11 @@ smooth.construct.slp.smooth.spec <- function(object, data, knots) {
                 }
             }
         } # end of SLP2/SLP3
+
+        a <- list(K = K, W = W, N = N, naive = naive)
+        attributes(basis) <- c(attributes(basis), a)
+        class(basis) <- c("slp", "basis", "matrix")
     } # end of basis vector generation
-  
-    ################################################################################ 
-    #
-    #  Problem: when mgcv() evaluates the family call, it tries to load the 
-    #  'mask' object. However ... it doesn't seem to be able to track it back 
-    #  to the subroutine from which the gam() call was made. So you have to 
-    #  assign the mask to the .GlobalEnv or everything craps out.
-    #
-    ################################################################################
-  
-    a <- list(K = K, W = W, N = N, naive = naive)
-    attributes(basis) <- c(attributes(basis), a)
-    class(basis) <- c("slp", "basis", "matrix")
   
     object[['size']] <- c(length(basis[, 1]), length(basis[1, ]))
     object[['X']] <- basis

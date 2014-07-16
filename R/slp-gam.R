@@ -2,12 +2,14 @@
 #  
 #  Extension for gam package allowing a projection Slepian basis to be used;
 #  part of the slp package
-#  - wburr, July 2014
+#  (C) wburr, July 2014
+#
+#  Licensed under GPL-2
 #
 ################################################################################
 
 slp <- function(x, W = NA, K = NA, deltat = 1, naive = FALSE, 
-                intercept = FALSE, customSVD = TRUE) {
+                intercept = FALSE, customSVD = TRUE, forceC = FALSE) {
 
   # logical checks (note: W is assumed to be in the same units as deltat, i.e., days)
   stopifnot(is.numeric(x), (is.na(W) | is.numeric(W) & W > 0 & W < 1/(2*deltat)), deltat %in% c(1, 6),
@@ -56,11 +58,10 @@ slp <- function(x, W = NA, K = NA, deltat = 1, naive = FALSE,
 
   # Logical check: if N, K and W match one of the saved objects, simply
   # return that object; otherwise, run through the generation process
-  # if(checkSaved(N, W, K) & !forceC) {
-  if(FALSE) {
+  Wn <- round(W * 365.2425)    # convert to df/year
+  if(checkSaved(N, Wn, K) & !forceC) {
 
-    Wn <- round(W * 365.2425)
-    data(paste0("basis_N_", N[j], "_W_", W[k], "_K_", K, ".RData"))
+    data(list = as.character(paste0("basis_N_", N, "_W_", Wn, "_K_", K)))
 
     if(!intercept) { basis <- basis[, -1] }
     
@@ -68,7 +69,6 @@ slp <- function(x, W = NA, K = NA, deltat = 1, naive = FALSE,
     if(any(is.na(x))) {
       basis[which(!(wx %in% x[!is.na(x)])), ] <- rep(NA, ncol(basis))
     }
-
   } else {
 
       # start by generating baseline Slepian basis vectors
