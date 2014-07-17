@@ -8,8 +8,12 @@
 %     <wesley.burr@gmail.com>
 %
 
+<<<<<<< HEAD
 \name{.dpss}
 \alias{.dpss}
+=======
+\name{dpss}
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 \alias{dpss}
 \title{Compute Discrete Prolate Spheroidal Sequences}
 \description{
@@ -21,7 +25,11 @@
    8.3 of Percival and Walden (1993) using LAPACK function calls,  Anderson (1999).
 }
 \usage{
+<<<<<<< HEAD
 .dpss(n,k,nw)
+=======
+dpss(n,k,nw)
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 }
 \arguments{
   \item{n}{A positive integer, typically the length of the time series-regression data set.}
@@ -51,4 +59,11 @@ Thomson, D.J (1982)
 Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
 Volume \bold{70}, number 9, pp. 1055--1096.
 }
+<<<<<<< HEAD
+=======
+\examples{
+dpssEx1 <- dpss(n = 10, k = 4, nw = 4.0)
+dpssEx2 <- dpss(n = 100,k = 8, nw = 5.0)
+}
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 \keyword{math}

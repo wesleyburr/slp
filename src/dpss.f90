@@ -1,6 +1,12 @@
 !  slp: Slepian Regression Smoothers
+<<<<<<< HEAD
 !   
 !  Originally algorithm: David J. Thomson, F77, ~ 1996
+=======
+!    
+!   
+!  Originally written: David J. Thomson, F77, ~ 1996
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 !  Updated: Karim Rahim, port to F90, bug fixes ~ 2011
 !  Current version: Wesley Burr, small modifications, ~ 2013
 !
@@ -14,7 +20,11 @@
 !
 !  Note the subroutine expects the memory for the matrix 'v' and the vector 
 !  'ev' to be allocated by the calling program. This is done by the 
+<<<<<<< HEAD
 !  '.dpss' subroutine in /R.
+=======
+!  'dpss' subroutine in /R.
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 !
 
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 useDynLib(slp, .registration = TRUE)
 
 export(slp,
@@ -10,4 +11,8 @@ importFrom(mgcv, smooth.construct, Predict.matrix)
 S3method(smooth.construct, slp.smooth.spec)
 S3method(Predict.matrix, slp.smooth)
 
+=======
+exportPattern("^[[:alpha:]]+")
+useDynLib(slp)
+>>>>>>> 377af2e41fed81b229176e9b10ff37c46e61f34b
 
