@@ -1,9 +1,0 @@
-Package: slp
-Type: Package
-Title: Discrete Prolate Spheroidal (Slepian) Sequence Regression Smoothers 
-Version: 1.0
-Date: 2014-03-17
-Author: Wesley Burr
-Maintainer: Wesley Burr <wesley.burr@gmail.com>
-Description: Interface for creation of 'slp' class smoother objects for use in Generalized Additive Models (e.g., packages 'gam' and 'mgcv'). 
-License: MIT
