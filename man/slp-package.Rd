@@ -13,9 +13,9 @@
 \tabular{ll}{
 Package: \tab slp\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2014-07-16\cr
-License: \tab MIT \cr
+Version: \tab 1.0-1\cr
+Date: \tab 2014-07-17\cr
+License: \tab GPL-2 \cr
 }
 }
 \author{
@@ -24,9 +24,12 @@ Wesley Burr
 Maintainer: Wesley Burr <wesley.burr@gmail.com>
 }
 \references{
-  Thomson, D.J (1982)
-  Spectrum estimation and harmonic analysis. \emph{Proceedings of the IEEE}
-  Volume \bold{70}, number 9, pp. 1055--1096.
+  Thomson, D.J. (1982) Spectrum estimation and harmonic analysis. 
+  \emph{Proceedings of the IEEE} Volume \bold{70}, number 9, pp. 1055--1096.
+
+  Thomson, D.J. (2001) Inverse Constrained Projection Filters. 
+  \emph{Proc. SPIE 4478}, Wavelets: Applications in Signal and Image Processing IX, 172 
+  (December 5, 2001); doi:10.1117/12.449708
 
   Hastie, T. J. (1991)
   \emph{Generalized additive models.}
