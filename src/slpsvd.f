@@ -1,14 +1,58 @@
+************************************************************************
 *
-*     Modified version of DGESDD from LAPACK-3.5
+*     DGESDD from LAPACK 3.5.0:
+*     ----------------------------------------------------------------
 *
-*     Removes a lot of features, since we will only ever call this
+*     Authors:
+*     ---------------------------------------
+*     \author Univ. of Tennessee 
+*     \author Univ. of California Berkeley 
+*     \author Univ. of Colorado Denver 
+*     \author NAG Ltd. 
+*
+*     \date November 2013
+*
+*     Contributors:
+*     -------------
+*     Ming Gu and Huan Ren, Computer Science Division, University of
+*     California at Berkeley, USA
+*
+*     Original function definition:
+*     -----------------------------
+*      SUBROUTINE dgesdd( JOBZ, M, N, A, LDA, S, U, LDU, VT, LDVT, WORK,
+*     $                   lwork, iwork, info )
+*
+*     Header:
+*     ----------
+* -- LAPACK computational routine (version 3.5.0) --
+* -- LAPACK is a software package provided by Univ. of Tennessee,    --
+* -- Univ. of California Berkeley, Univ. of Colorado Denver and NAG Ltd.
+*    November 2013
+*     
+************************************************************************
+*
+*     Modified version of DGESDD, named SLPSVD:
+*     -----------------------------------------
+*
+*     Author/Contributor:
+*     ---------------------------------
+*     \author Wesley Burr
+*
+*     \date July 2014
+*
+*     Modifications:
+*     ------------------
+*     Removed a lot of features, since we will only ever call this
 *     function with M = N, and will only ever require the left
-*     singular vectors (not the right). 
+*     singular vectors (not the right). Also calls SLPDOR instead of
+*     DORMQR.
 *
 *     In addition, all frameworks regarding size decisions have been
 *     removed, and the "optimal" size for our specific sub-case will 
 *     always be provided
-
+*
+************************************************************************
+*
       SUBROUTINE SLPSVD( M, N, A, LDA, S, VT, LDVT, WORK,
      $                   LWORK, IWORK, NLSV )
 

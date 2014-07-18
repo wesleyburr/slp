@@ -1,5 +1,6 @@
 \name{slp-package}
 \alias{slp-package}
+\alias{slp.package}
 \alias{Slepians}
 \docType{package}
 \title{
@@ -13,13 +14,13 @@
 \tabular{ll}{
 Package: \tab slp\cr
 Type: \tab Package\cr
-Version: \tab 1.0-1\cr
-Date: \tab 2014-07-17\cr
+Version: \tab 1.0-2\cr
+Date: \tab 2014-07-18\cr
 License: \tab GPL-2 \cr
 }
 }
 \author{
-Wesley Burr
+Wesley Burr, with contributions from Karim Rahim
 
 Maintainer: Wesley Burr <wesley.burr@gmail.com>
 }
@@ -55,9 +56,4 @@ Maintainer: Wesley Burr <wesley.burr@gmail.com>
 \keyword{ts}
 \keyword{smooth}
 \keyword{Slepian}
-\seealso{
-\code{\link[multitaper:spec.mtm]{multitaper}}
-\code{\link[mgcv]{mgcv}}
-\code{\link[gam]{gam}}
-}
 

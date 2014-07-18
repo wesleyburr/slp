@@ -1,7 +1,7 @@
 Package: slp
-Version: 1.0-1
-Author: Wesley Burr, with contributions from Karim Rahim, David J. Thomson
-   and the LAPACK Team (3.5.0)
+Version: 1.0-2
+Author: Wesley Burr, with contributions from Karim Rahim
+Copyright: file COPYRIGHTS
 Maintainer: Wesley Burr <wesley.burr@gmail.com>
 Title: Discrete Prolate Spheroidal (Slepian) Sequence Regression Smoothers
 Description: Interface for creation of 'slp' class smoother objects for 
@@ -11,6 +11,6 @@ Depends: R (>= 2.15.1)
 License: GPL (>= 2)
 Imports: mgcv (>= 1.7.18)
 Suggests: gam (>= 1.09)
-Packaged: 2014-07-17 12:49:00 UTC; wburr
+Packaged: 2014-07-18 13:00:00 UTC; wburr
 NeedsCompilation: yes
 Repository: cran

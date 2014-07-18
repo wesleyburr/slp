@@ -1,10 +1,62 @@
-* DORMQR overwrites the general real M-by-N matrix C with Q * C
-* where Q is a real orthogonal matrix defined as the product of k
-* elementary reflectors
+************************************************************************
 *
-*       Q = H(1) H(2) . . . H(k)
+*     DORMQR from LAPACK 3.5.0 (not updated since 3.4.0):
+*     ---------------------------------------------------
 *
-* as returned by DGEQRF. Q is of order M if SIDE = 'L'
+*     Authors:
+*     ---------------------------------------
+*     \author Univ. of Tennessee 
+*     \author Univ. of California Berkeley 
+*     \author Univ. of Colorado Denver 
+*     \author NAG Ltd. 
+*
+*     \date November 2011
+*
+*     Original function definition:
+*     -----------------------------
+*      SUBROUTINE dormqr( SIDE, TRANS, M, N, K, A, LDA, TAU, C, LDC,
+*     $                   work, lwork, info )
+*
+*     Header:
+*     -------------------
+* -- LAPACK computational routine (version 3.4.0) --
+* -- LAPACK is a software package provided by Univ. of Tennessee,    
+* -- Univ. of California Berkeley, Univ. of Colorado Denver and NAG Ltd.
+*    November 2011
+*
+************************************************************************
+*
+*     Modified version of DORMQR, named SLPDOR:
+*     -----------------------------------------
+*
+*     Author/Contributor:
+*     ---------------------------------
+*     \author Wesley Burr
+*
+*     \date July 2014
+*
+*     Modifications:
+*     ------------------
+*
+*     DORMQR overwrites the general real M-by-N matrix C with Q * C
+*     where Q is a real orthogonal matrix defined as the product of k
+*     elementary reflectors
+*
+*         Q = H(1) H(2) . . . H(k)
+*
+*     as returned by DGEQRF. Q is of order M if SIDE = 'L'
+*
+*     This modified version adds an additional parameter NLSV, and only
+*     computes the first NLSV left singular vectors, rather than the
+*     entire M = N set. This provides significant speed improvements.
+*
+*     NOTE: the svd() call in R has parameters which appear (in the
+*     documentation) to do the same thing, but they act _after_ the
+*     computation, and truncate the returned vectors. This is obviously
+*     not the point of reducing the number of vectors, which is why this
+*     routine is necessary.
+*
+************************************************************************
 *
       SUBROUTINE SLPDOR( SIDE, TRANS, M, N, K, A, LDA, TAU, C, LDC,
      $                   WORK, NLSV )

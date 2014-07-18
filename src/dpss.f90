@@ -1,7 +1,7 @@
 !  slp: Slepian Regression Smoothers
 !   
-!  Originally algorithm: David J. Thomson, F77, ~ 1996
-!  Updated: Karim Rahim, port to F90, bug fixes ~ 2011
+!  Original algorithm: David J. Thomson, F77, ~ 1996
+!  Code: Karim Rahim, re-write in F90, bug fixes ~ 2011
 !  Current version: Wesley Burr, small modifications, ~ 2013
 !
 !  This file is part of the slp package for R.

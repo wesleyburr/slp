@@ -9,7 +9,7 @@
 
   Based on \code{\link[splines]{ns}} for implementation with \code{\link[gam]{gam}}.
 
-  Parallel implementation for \code{\link[mgcv]{mgcv}} included in package as
+  Parallel implementation for \code{mgcv} included in package as
   \code{\link{slp.mgcv}}.
 }
 \usage{
